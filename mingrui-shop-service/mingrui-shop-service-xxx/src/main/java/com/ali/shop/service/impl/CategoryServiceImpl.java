@@ -2,7 +2,9 @@ package com.ali.shop.service.impl;
 
 import com.ali.shop.base.BaseApiService;
 import com.ali.shop.base.Result;
+import com.ali.shop.entity.CategoryBrandEntity;
 import com.ali.shop.entity.CategoryEntity;
+import com.ali.shop.mapper.CategoryBrandMapper;
 import com.ali.shop.mapper.CategoryMapper;
 import com.ali.shop.service.CategoryService;
 import com.ali.shop.utils.ObjectUtil;
@@ -27,6 +29,9 @@ import java.util.List;
 public class CategoryServiceImpl extends BaseApiService implements CategoryService {
     @Resource
     private CategoryMapper categoryMapper;
+
+    @Resource
+    private CategoryBrandMapper categoryBrandMapper;
 
     @Transactional
     @Override
@@ -75,7 +80,16 @@ public class CategoryServiceImpl extends BaseApiService implements CategoryServi
         if(ObjectUtil.isNull(categoryEntity))return this.setResultError("数据不存在");
 
         //判断当前节点是否为父节点
-        if(categoryEntity.getIsParent()==1)return this.setResultError("当前节点为父错节点");
+        if(categoryEntity.getIsParent()==1)return this.setResultError("当前节点为父节点");
+
+        Example example1 = new Example(CategoryBrandEntity.class);
+        example1.createCriteria().andEqualTo("categoryId",id);
+        List<CategoryBrandEntity> categoryBrandEntities = categoryBrandMapper.selectByExample(example1);
+        if(categoryBrandEntities.size() != 0){
+            return this.setResultError("该属性已被品牌绑定不能删除");
+        }
+
+
 
         //通过当前节点的父节点id查询当前节点(将要被删除的节点)的父节点下是否还有其它子节点
         Example example = new Example(CategoryEntity.class);

@@ -63,7 +63,9 @@ public class SpecificationServiceImpl extends BaseApiService implements Specific
     @Override
     public Result<JSONObject> deleteSpecGroupById(Integer id) {
         //删除规格组之前需要先判断一下当前规格组下是否有规格参数 true不能被删除
+        //将groupId传过来
         Example example = new Example(SpecParamEntity.class);
+        //根据groupId查询,如果返回集合大于0,就不能删除
         example.createCriteria().andEqualTo("groupId",id);
         List<SpecParamEntity>specParamEntities=specParamMapper.selectByExample(example);
         if (specParamEntities.size()>0){

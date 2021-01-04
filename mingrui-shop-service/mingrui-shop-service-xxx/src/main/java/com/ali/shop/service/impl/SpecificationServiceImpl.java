@@ -69,7 +69,7 @@ public class SpecificationServiceImpl extends BaseApiService implements Specific
         example.createCriteria().andEqualTo("groupId",id);
         List<SpecParamEntity>specParamEntities=specParamMapper.selectByExample(example);
         if (specParamEntities.size()>0){
-            return this.setResultSuccess("该规格组有数据无法删除");
+            return this.setResultError("该规格组有数据无法删除");
         }
         specGroupMapper.deleteByPrimaryKey(id);
         return this.setResultSuccess();

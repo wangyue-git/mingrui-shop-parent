@@ -2,7 +2,9 @@ package com.ali.shop.service;
 
 import com.ali.shop.base.Result;
 import com.ali.shop.dto.SpecGroupDTO;
+import com.ali.shop.dto.SpecParamDTO;
 import com.ali.shop.entity.SpecGroupEntity;
+import com.ali.shop.entity.SpecParamEntity;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,6 +31,21 @@ public interface SpecificationService {
     @DeleteMapping(value = "specgroup/delete/{id}")
     Result<JSONObject> deleteSpecGroupById(@PathVariable Integer id);
 
+    @ApiOperation(value = "通过条件查询规格参数")
+    @GetMapping(value = "specparam/getSpecParamInfo")
+    Result<List<SpecParamEntity>> getSpecParamInfo(SpecParamDTO specParamDTO);
 
+    @ApiOperation(value = "新增规格参数")
+    @PostMapping(value = "specparam/save")
+    Result<JSONObject> saveSpecParam(@RequestBody SpecParamDTO specParamDTO);
+
+    @ApiOperation(value = "修改规格参数")
+    @PutMapping(value = "specparam/save")
+    Result<JSONObject> editSpecParam(@RequestBody SpecParamDTO specParamDTO);
+
+
+    @ApiOperation(value = "删除规格参数")
+    @DeleteMapping(value = "specparam/delete")
+    Result<JSONObject> deleteSpecParam(Integer id);
 
 }

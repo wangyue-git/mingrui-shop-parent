@@ -1,5 +1,6 @@
 package com.ali.shop.entity;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
  **/
 @Data
 @Table(name = "tb_brand")
+@ApiModel(value = "品牌")
 public class BrandEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

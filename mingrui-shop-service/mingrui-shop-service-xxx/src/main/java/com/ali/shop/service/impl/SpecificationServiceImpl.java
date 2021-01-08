@@ -10,6 +10,7 @@ import com.ali.shop.mapper.SpecGroupMapper;
 import com.ali.shop.mapper.SpecParamMapper;
 import com.ali.shop.service.SpecificationService;
 import com.ali.shop.utils.ALiBeanUtil;
+import com.ali.shop.utils.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,7 +81,14 @@ public class SpecificationServiceImpl extends BaseApiService implements Specific
     public Result<List<SpecParamEntity>> getSpecParamInfo(SpecParamDTO specParamDTO) {
         SpecParamEntity specParamEntity = ALiBeanUtil.copyProperties(specParamDTO, SpecParamEntity.class);
         Example example = new Example(SpecParamEntity.class);
-        example.createCriteria().andEqualTo("groupId",specParamEntity.getGroupId());
+        Example.Criteria criteria = example.createCriteria();
+        //example.createCriteria().andEqualTo("groupId",specParamEntity.getGroupId());
+        //通过groupId查找
+        if (ObjectUtil.isNotNull(specParamEntity.getGroupId()))
+            criteria.andEqualTo("groupId",specParamEntity.getGroupId());
+        //通过cid查找
+        if (ObjectUtil.isNotNull(specParamEntity.getCid()))
+            criteria.andEqualTo("cid",specParamEntity.getCid());
 
         List<SpecParamEntity> specParamEntities = specParamMapper.selectByExample(example);
 

@@ -11,11 +11,6 @@
 
     <artifactId>mingrui-shop-basic-eureka-server</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
     <dependencies> <!--eureka 服务依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

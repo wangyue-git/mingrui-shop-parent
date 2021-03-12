@@ -75,7 +75,7 @@ public class GoodsServiceImpl extends BaseApiService implements GoodsService {
         //查询sql
         List<SpuEntity> spuEntities = spuMapper.selectByExample(example);
 
-
+        //java1.8新特性
         List<SpuDTO> spuDTOList = spuEntities.stream().map(spuEntity -> {
             SpuDTO spuDTO1 = ALiBeanUtil.copyProperties(spuEntity, SpuDTO.class);
             //通过分类id集合查询数据

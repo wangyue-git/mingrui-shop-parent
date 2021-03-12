@@ -12,6 +12,7 @@
     <artifactId>mingrui-shop-service</artifactId>
     <modules>
         <module>mingrui-shop-service-xxx</module>
+        <module>mingrui-shop-service-search</module>
     </modules>
 
     <properties>

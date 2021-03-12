@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public interface GoodsService {
     @ApiOperation(value = "查询spu信息")
     @GetMapping(value = "/goods/getSpuInfo")
-    Result<List<SpuDTO>> getSpuInfo(SpuDTO spuDTO);
+    Result<List<SpuDTO>> getSpuInfo(@SpringQueryMap SpuDTO spuDTO);
 
     @ApiOperation(value = "新增商品")
     @PostMapping(value = "/goods/save")
